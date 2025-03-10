@@ -15,30 +15,21 @@ const emit = defineEmits<{
 }>();
 
 onMounted(() => {
-  console.log("Editor mounting..."); // 디버깅용 로그
-  if (!editorElement.value) {
-    console.log("Editor element not found"); // 디버깅용 로그
-    return;
-  }
+  if (!editorElement.value) return;
 
-  try {
-    editorInstance = new Editor({
-      el: editorElement.value,
-      height: "500px", // 고정 높이로 테스트
-      initialValue: props.initialValue || "",
-      initialEditType: "markdown",
-      previewStyle: "vertical",
-      language: "ko-KR",
-    });
+  editorInstance = new Editor({
+    el: editorElement.value,
+    initialValue: props.initialValue || "",
+    initialEditType: "markdown",
+    previewStyle: "vertical",
+    height: "100vh",
+    language: "ko-KR",
+    usageStatistics: false,
+  });
 
-    console.log("Editor mounted successfully"); // 디버깅용 로그
-
-    editorInstance.on("change", () => {
-      emit("change", editorInstance?.getMarkdown() || "");
-    });
-  } catch (error) {
-    console.error("Editor mounting error:", error); // 에러 로깅
-  }
+  editorInstance.on("change", () => {
+    emit("change", editorInstance?.getMarkdown() || "");
+  });
 });
 
 onBeforeUnmount(() => {
@@ -56,25 +47,49 @@ defineExpose({
 
 <template>
   <div class="editor-wrapper">
-    <!-- 테스트용 텍스트 추가 -->
-    <div class="mb-4">에디터 컴포넌트</div>
-    <div ref="editorElement"></div>
+    <div ref="editorElement" class="editor-element"></div>
   </div>
 </template>
 
-<style scoped>
+<style>
 .editor-wrapper {
+  width: 100%;
   height: 100%;
-  border: 1px solid #e2e8f0; /* 테스트용 테두리 */
-  padding: 1rem;
+  background-color: white;
 }
 
-:deep(.toastui-editor-defaultUI) {
-  border: none;
+.editor-element {
+  width: 100%;
+  height: 100%;
 }
 
-:deep(.toastui-editor-defaultUI-toolbar) {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
+/* Toast UI Editor 스타일 오버라이드 */
+.toastui-editor-defaultUI {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  background-color: white !important;
+}
+
+.toastui-editor-defaultUI-toolbar {
+  border: none !important;
+  padding: 5px !important;
+  background-color: white !important;
+}
+
+.toastui-editor-main {
+  height: calc(100% - 45px) !important;
+  background-color: white !important;
+}
+
+.toastui-editor-main .toastui-editor-md-container,
+.toastui-editor-main .toastui-editor-ww-container {
+  background-color: white !important;
+  height: 100% !important;
+}
+
+.toastui-editor-md-preview {
+  background-color: white !important;
+  height: 100% !important;
 }
 </style>
