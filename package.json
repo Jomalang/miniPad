@@ -16,16 +16,23 @@
     "app:build": "yarn build:for:electron && yarn electron:builder"
   },
   "dependencies": {
+    "@toast-ui/editor": "^3.2.2",
+    "@vueuse/core": "^13.0.0",
+    "electron-store": "^10.0.1",
     "minipad": "file:",
+    "pinia": "^3.0.1",
+    "tailwindcss": "^4.0.12",
     "vue": "^3.5.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
+    "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "electron": "^35.0.0",
     "electron-builder": "^25.1.8",
+    "postcss": "^8.5.3",
     "typescript": "~5.7.2",
     "vite": "^6.2.0",
     "vue-tsc": "^2.2.4",

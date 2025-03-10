@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import MemoHome from "./MemoHome.vue";
+import AppHeader from "./components/layout/AppHeader.vue";
+import MemoHome from "./components/MemoHome.vue";
 </script>
 
 <template>
-  <h1>MiniPad 개발 중</h1>
-  <MemoHome />
+  <div class="h-screen flex flex-col">
+    <AppHeader />
+    <main class="flex-1 overflow-hidden bg-white">
+      <MemoHome />
+      <div class="p-4">테스트 텍스트</div>
+    </main>
+  </div>
 </template>
 
-<style scoped></style>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+}
+</style>
