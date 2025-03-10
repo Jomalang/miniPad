@@ -16,6 +16,7 @@
     "app:build": "yarn build:for:electron && yarn electron:builder"
   },
   "dependencies": {
+    "minipad": "file:",
     "vue": "^3.5.13"
   },
   "devDependencies": {
